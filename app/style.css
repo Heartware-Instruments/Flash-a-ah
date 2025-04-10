@@ -1,4 +1,4 @@
-.info{
+/* .info{
     text-align: left;
 }
 
@@ -58,8 +58,8 @@ text-align: left;
     margin: 5px;
 
 }
-
-/* @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap');
+ */
+ @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap');
 
 .info{
     text-align: left;
@@ -123,7 +123,7 @@ code.language-cpp {
     margin: 20px;
     text-align: left;
 }
- */
+
 
 .nested_list, .info, #readme {
     text-align: left;

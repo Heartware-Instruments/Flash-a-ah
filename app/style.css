@@ -52,6 +52,17 @@ h1, h2, h3, legend {
     color: #ddd;
 }
 
+.nested_list {
+    justify-content: left;
+    align-items: left;
+    margin: 20px;
+    text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+}
+
 table, th, td {
     border: 1px solid #444;
     color: #ddd;
@@ -79,6 +90,23 @@ code.language-cpp {
     max-width: 90vw;
     filter: drop-shadow(0 0 2px rgba(255, 182, 0, 0.6));
 }
+
+.app_body {
+    background-color: #000;
+    color: #00ff00;
+    padding: 20px;
+}
+
+.app_column {
+    background-color: #111;
+    border: 2px solid #00ff00;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
+
 
 /*  @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap');
 

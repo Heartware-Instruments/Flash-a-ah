@@ -224,6 +224,9 @@ var app = new Vue({
         </b-row>
         <b-row align="between">
             <b-col align="center" class="app_column">
+	    <div class="logo-glitch">
+		  <img src="data/heartware-Logo.svg" alt="Heartware Instruments Logo" />
+		</div>
                 <b-container>
                     <b-row class="p-2">
                         <legend>Getting Started? Flash the Blink example!</legend>

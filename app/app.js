@@ -165,6 +165,10 @@ var app = new Vue({
         </b-form>
     </div>
     <b-row align="center" class="app_column">
+
+    	   <div class="logo-glitch">
+	 	<img src="data/HeartwareLogo.svg" alt="Heartware Instruments Logo" />
+	  </div>
         <div>
             <legend>Heartware Instruments Flash A-Ah</legend>
             <p> Connect to LiveCut - If this is your first time here, follow the steps in Help section below </p>

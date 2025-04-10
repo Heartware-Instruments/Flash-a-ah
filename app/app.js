@@ -228,10 +228,6 @@ var app = new Vue({
         <b-row align="between">
             <b-col align="center" class="app_column">
                 <b-container>
-                    // <b-row class="p-2">
-                    //     <legend>Getting Started? Flash the Blink example!</legend>
-                    //     <div><b-button variant="es" id="blink"  :disabled="no_device">Flash Blink!</b-button></div>
-                    // </b-row>
                     <hr>
                     <b-row class="p-2">
                         <legend> Select module and select firmware.</legend>
@@ -249,16 +245,6 @@ var app = new Vue({
                         </b-form-select>
                     </b-row>
                     <hr>
-                    // <b-row class="p-2">
-                    //     <legend> Or select a file from your computer</legend>
-                    //         <b-form-file
-                    //             id="firmwareFile"
-                    //             v-model="firmwareFile"
-                    //             :state="Boolean(firmwareFile)"
-                    //             placeholder="Choose or drop a file..."
-                    //             drop-placeholder="Drop file here..."
-                    //         ></b-form-file>
-                    // </b-row>
                 </b-container>
             </b-col>
         </b-row>

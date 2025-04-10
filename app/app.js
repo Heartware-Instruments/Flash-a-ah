@@ -166,8 +166,8 @@ var app = new Vue({
     </div>
     <b-row align="center" class="app_column">
         <div>
-            <legend>Daisy Web Programmer</legend>
-            <p> Connect to the Daisy - If this is your first time here, follow the steps in Help section below </p>
+            <legend>Heartware Instruments Flash A-Ah</legend>
+            <p> Connect to LiveCut - If this is your first time here, follow the steps in Help section below </p>
             <p><b-button variant="es" id="connect"> Connect</b-button></p>
             <dialog id="interfaceDialog">
                 Your device has multiple DFU interfaces. Select one from the list below:
@@ -183,7 +183,7 @@ var app = new Vue({
                     <div class="nested_list">
                         <h2>Usage:</h2>
                         <ol>
-                            <li><p>Connect the Daisy to the Computer</p></li>
+                            <li><p>Connect the LiveCut to the Computer</p></li>
                             <li><p>Enter the system bootloader by holding the BOOT button down, and then pressing, and releasing the RESET button.</p></li>
                             <li><p>Click the Connect button at the top of the page.</p></li>
                             <li><p>Select, "DFU in FS Mode"</p></li>
@@ -196,7 +196,7 @@ var app = new Vue({
                                 </ul>
                             </li>
                             <li><p>Click Program, and wait for the progress bar to finish.</p></li>
-                            <li><p>Now, if the program does not start immediatley, pressing RESET on the Daisy will cause the program to start running.</p></li>
+                            <li><p>Now, if the program does not start immediatley, pressing RESET on LiveCut will cause the program to start running.</p></li>
                         </ol>
                         <p>
                             On windows, you may have to update the driver to WinUSB.
@@ -214,7 +214,7 @@ var app = new Vue({
                                 <p>An up-to-date version of Chrome, at least version 61 or newer</p>
                             </li>
                             <li>
-                                <p>A Daisy Seed SOM. (The user-uploaded binary will work for any STM32 chip with a built in DFU bootloader).</p>
+                                <p>A LiveCut Module.</p>
                             </li>
                         </ul>
                     </div>

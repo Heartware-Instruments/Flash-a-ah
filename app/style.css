@@ -183,7 +183,7 @@ code.language-cpp {
     animation: glitch 1.2s infinite linear;
 } */
 
-/* .logo-glitch {
+ .logo-glitch {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,7 +193,7 @@ code.language-cpp {
 
 .logo-glitch img {
     width: 200px; /* You can scale this as needed */
-/*     max-width: 90vw;
+    max-width: 90vw;
     animation: glitch 1.2s infinite linear;
     display: block;
 }
@@ -243,4 +243,4 @@ code.language-cpp {
     opacity: 0.7;
   }
 }
-  */
+

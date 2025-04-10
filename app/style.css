@@ -71,11 +71,12 @@ code.language-cpp {
 }
 .daisystyle {
     background-color: #222;
-    border-color: #00ff00;
+    border-color: #000000;
     padding: 10px;
+    border: solid;
     border-radius: 15px;
     margin: 5px;
-    color: #00ff00;
+    color: #000000;
 /*     color: #fff;
     background-color: gray;
     padding: 10px;
@@ -85,4 +86,65 @@ code.language-cpp {
     margin: 5px; */
 
 }
+
+.logo-glitch {
+    position: relative;
+    width: 300px;
+    margin: 40px auto 20px;
+    filter: contrast(1.2) brightness(1.1);
+    animation: glitch-pulse 2.5s infinite;
+}
+
+.logo-glitch img {
+    width: 100%;
+    display: block;
+    animation: glitch 1.2s infinite linear;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0, 0);
+    filter: drop-shadow(0 0 0 lime);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+    filter: drop-shadow(-2px 0 magenta);
+  }
+  20% {
+    transform: translate(2px, -2px);
+    filter: drop-shadow(2px 0 cyan);
+  }
+  30% {
+    transform: translate(-1px, 1px);
+    filter: drop-shadow(-1px 0 lime);
+  }
+  40% {
+    transform: translate(1px, -1px);
+    filter: drop-shadow(1px 0 red);
+  }
+  50% {
+    transform: translate(0, 0);
+    filter: drop-shadow(0 0 0 white);
+  }
+  100% {
+    transform: translate(0, 0);
+    filter: drop-shadow(0 0 0 lime);
+  }
+}
+
+@keyframes glitch-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  55% {
+    opacity: 0.7;
+  }
+}
+
 

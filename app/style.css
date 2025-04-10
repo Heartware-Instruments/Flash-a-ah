@@ -148,7 +148,7 @@ code.language-cpp {
 
 }
 
-.logo-glitch {
+/* .logo-glitch {
     position: relative;
     width: 50%;
     margin: 40px auto 20px;
@@ -160,6 +160,21 @@ code.language-cpp {
     width: 50%;
     display: block;
     animation: glitch 1.2s infinite linear;
+} */
+
+.logo-glitch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto 20px;
+    animation: glitch-pulse 2.5s infinite;
+}
+
+.logo-glitch img {
+    width: 200px; /* You can scale this as needed */
+    max-width: 90vw;
+    animation: glitch 1.2s infinite linear;
+    display: block;
 }
 
 @keyframes glitch {

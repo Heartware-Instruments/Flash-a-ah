@@ -1,5 +1,5 @@
 // Generic Strings
-const root_url = "https://electro-smith.github.io/Programmer"
+const root_url = "https://heartware-instruments.github.io/Flash-a-ah"
 
 // New changes involve reading from sources.json to find the 'sources' we should pull from
 // Those sources replace the previously hard coded 'examples.json' file, and should otherwise 
@@ -324,21 +324,42 @@ var app = new Vue({
         //         firmwareFile = buffer
         //     })
         // }
-	programChanged(){
-	    var self = this;
-	    self.firmwareFileName = "LIVECUT";
+	// programChanged(){
+	//     var self = this;
+	//     self.firmwareFileName = "LIVECUT";
+	//     this.displaySelectedFile = true;
+	//     var livecutExample = self.examples.find(e => e.name.toLowerCase().includes("LiveCut"));
+	//     if (livecutExample) {
+	//         self.sel_example = livecutExample;
+	//         var srcurl = livecutExample.source.repo_url;
+	//         var expath = srcurl.concat(livecutExample.filepath);
+	//         readServerFirmwareFile(expath).then(buffer => {
+	//             firmwareFile = buffer;
+	//         });
+	//     }
+	// }
+	programChanged() 
+	{
+	    const self = this;
+	    self.firmwareFileName = "LiveCut";
 	    this.displaySelectedFile = true;
-	    var livecutExample = self.examples.find(e => e.name.toLowerCase().includes("livecut"));
+	
+	    // Find the example using strict match
+	    const livecutExample = self.examples.find(e =>
+	        e.name === "LiveCut" && e.platform === "patch_sm"
+	    );
+	
 	    if (livecutExample) {
 	        self.sel_example = livecutExample;
-	        var srcurl = livecutExample.source.repo_url;
-	        var expath = srcurl.concat(livecutExample.filepath);
+	        const srcurl = livecutExample.source.repo_url;
+	        const expath = srcurl + livecutExample.filepath;
 	        readServerFirmwareFile(expath).then(buffer => {
 	            firmwareFile = buffer;
 	        });
+	    } else {
+	        console.warn("LiveCut firmware not found!");
 	    }
-	}
-	,
+	},
     },
     watch: {
         firmwareFile(newfile){
@@ -396,6 +417,10 @@ var app = new Vue({
                     }    
                 }
             }
+	    if (!self.sel_example) 
+	    {
+	      this.programChanged(); // auto-load LiveCut
+	    }
         }
     }
 })

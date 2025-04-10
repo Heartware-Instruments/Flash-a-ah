@@ -165,6 +165,9 @@ var app = new Vue({
         </b-form>
     </div>
     <b-row align="center" class="app_column">
+		<div class="logo-glitch">
+			<img src="data/HeartwareLogo.svg" alt="Heartware Instruments Logo" />
+		</div>
         <div>
             <legend>LiveCut Web Programmer</legend>
             <p> Connect to LiveCut - If this is your first time here, follow the steps in Help section below </p>
@@ -224,9 +227,6 @@ var app = new Vue({
         </b-row>
         <b-row align="between">
             <b-col align="center" class="app_column">
-	    <div class="logo-glitch">
-		  <img src="data/HeartwareLogo.svg" alt="Heartware Instruments Logo" />
-		</div>
                 <b-container>
                     <b-row class="p-2">
                         <legend>Getting Started? Flash the Blink example!</legend>

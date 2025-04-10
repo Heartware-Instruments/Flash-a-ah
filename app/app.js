@@ -342,28 +342,44 @@ var app = new Vue({
 	//         });
 	//     }
 	// }
-	programChanged() 
-	{
+	// programChanged() 
+	// {
+	//     const self = this;
+	//     self.firmwareFileName = "LiveCut";
+	//     this.displaySelectedFile = true;
+	
+	//     // Find the example using strict match
+	//     const livecutExample = self.examples.find(e =>
+	//         e.name === "LiveCut" && e.platform === "patch_sm"
+	//     );
+	
+	//     if (livecutExample) {
+	//         self.sel_example = livecutExample;
+	//         const srcurl = livecutExample.source.repo_url;
+	//         const expath = srcurl + livecutExample.filepath;
+	//         readServerFirmwareFile(expath).then(buffer => {
+	//             firmwareFile = buffer;
+	//         });
+	//     } else {
+	//         console.warn("LiveCut firmware not found!");
+	//     }
+	// }
+	programChanged() {
 	    const self = this;
-	    self.firmwareFileName = "LiveCut";
+	
+	    if (!self.sel_example || !self.sel_example.source) return;
+	
+	    const srcurl = self.sel_example.source.repo_url;
+	    const expath = srcurl + self.sel_example.filepath;
+	
+	    self.firmwareFileName = self.sel_example.name;
 	    this.displaySelectedFile = true;
 	
-	    // Find the example using strict match
-	    const livecutExample = self.examples.find(e =>
-	        e.name === "LiveCut" && e.platform === "patch_sm"
-	    );
-	
-	    if (livecutExample) {
-	        self.sel_example = livecutExample;
-	        const srcurl = livecutExample.source.repo_url;
-	        const expath = srcurl + livecutExample.filepath;
-	        readServerFirmwareFile(expath).then(buffer => {
-	            firmwareFile = buffer;
-	        });
-	    } else {
-	        console.warn("LiveCut firmware not found!");
-	    }
-	},
+	    readServerFirmwareFile(expath).then(buffer => {
+	        firmwareFile = buffer;
+	    });
+	}
+	,
     },
     watch: {
         firmwareFile(newfile){
@@ -385,46 +401,92 @@ var app = new Vue({
             }
             reader.readAsArrayBuffer(newfile);
         },
-        examples(){
-            var self = this
-
-            //grab the blink firmware file
-            var blink_example = self.examples.filter(example => example.name.toLowerCase() === "blink" && example.platform === "seed")[0]
-
-            // Read new file
-            self.firmwareFileName = blink_example.name
-            var srcurl = blink_example.source.repo_url
-            var expath = srcurl.concat(blink_example.filepath)
-        	readServerFirmwareFile(expath, false).then(buffer => {
-                blinkFirmwareFile = buffer
-            })
-
-            // grab the bootloader firmware file
-            var srcurl = blink_example.source.bootloader_url
-        	readServerFirmwareFile(srcurl, false).then(buffer => {
-                bootloaderFirmwareFile = buffer
-            })
-
-            //parse the query strings
-            var searchParams = new URLSearchParams(getRootUrl().split("?")[1])
-            
-            var platform = searchParams.get('platform')
-            var name = searchParams.get('name')
-            if(platform != null && self.examples.filter(ex => ex.platform === platform)){
-                self.sel_platform = platform
-
-                if(name != null){
-                    var ex = self.examples.filter(ex => ex.name === name && ex.platform === platform)[0]
-                    if(ex != null){
-                        self.sel_example = ex
-                        this.programChanged()
-                    }    
-                }
-            }
-	    if (!self.sel_example) 
-	    {
-	      this.programChanged(); // auto-load LiveCut
+	examples() {
+	    const self = this;
+	
+	    // === Load Blink firmware (if present) ===
+	    const blink_example = self.examples.find(ex =>
+	        ex.name.toLowerCase() === "blink" && ex.platform === "seed"
+	    );
+	
+	    if (blink_example) {
+	        const blinkUrl = blink_example.source.repo_url + blink_example.filepath;
+	        readServerFirmwareFile(blinkUrl, false).then(buffer => {
+	            blinkFirmwareFile = buffer;
+	        });
+	
+	        const bootloaderUrl = blink_example.source.bootloader_url;
+	        readServerFirmwareFile(bootloaderUrl, false).then(buffer => {
+	            bootloaderFirmwareFile = buffer;
+	        });
 	    }
-        }
+	
+	    // === Check query string for platform/name ===
+	    const searchParams = new URLSearchParams(getRootUrl().split("?")[1]);
+	    const platform = searchParams.get('platform');
+	    const name = searchParams.get('name');
+	
+	    if (platform && name) {
+	        const matching = self.examples.find(ex => ex.platform === platform && ex.name === name);
+	        if (matching) {
+	            self.sel_platform = platform;
+	            self.sel_example = matching;
+	            this.programChanged();
+	        }
+	    } else {
+	        // If no query param, try to auto-load LiveCut
+	        const livecut = self.examples.find(ex =>
+	            ex.name === "LiveCut" && ex.platform === "patch_sm"
+	        );
+	
+	        if (livecut) {
+	            self.sel_platform = livecut.platform;
+	            self.sel_example = livecut;
+	            this.programChanged();
+	        }
+	    }
+	}
+
+     //    examples(){
+     //        var self = this
+
+     //        //grab the blink firmware file
+     //        var blink_example = self.examples.filter(example => example.name.toLowerCase() === "blink" && example.platform === "seed")[0]
+
+     //        // Read new file
+     //        self.firmwareFileName = blink_example.name
+     //        var srcurl = blink_example.source.repo_url
+     //        var expath = srcurl.concat(blink_example.filepath)
+     //    	readServerFirmwareFile(expath, false).then(buffer => {
+     //            blinkFirmwareFile = buffer
+     //        })
+
+     //        // grab the bootloader firmware file
+     //        var srcurl = blink_example.source.bootloader_url
+     //    	readServerFirmwareFile(srcurl, false).then(buffer => {
+     //            bootloaderFirmwareFile = buffer
+     //        })
+
+     //        //parse the query strings
+     //        var searchParams = new URLSearchParams(getRootUrl().split("?")[1])
+            
+     //        var platform = searchParams.get('platform')
+     //        var name = searchParams.get('name')
+     //        if(platform != null && self.examples.filter(ex => ex.platform === platform)){
+     //            self.sel_platform = platform
+
+     //            if(name != null){
+     //                var ex = self.examples.filter(ex => ex.name === name && ex.platform === platform)[0]
+     //                if(ex != null){
+     //                    self.sel_example = ex
+     //                    this.programChanged()
+     //                }    
+     //            }
+     //        }
+	    // if (!self.sel_example) 
+	    // {
+	    //   this.programChanged(); // auto-load LiveCut
+	    // }
+     //    }
     }
 })

@@ -157,7 +157,7 @@ code.language-cpp {
 }
 
 .logo-glitch img {
-    width: 100%;
+    width: 20%;
     display: block;
     animation: glitch 1.2s infinite linear;
 }

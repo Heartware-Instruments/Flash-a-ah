@@ -224,70 +224,13 @@ var app = new Vue({
         </b-row>
         <b-row align="between">
             <b-col align="center" class="app_column">
-                <b-container>
-                    <b-row class="p-2">
-                        <legend>Getting Started? Flash the Blink example!</legend>
-                        <div><b-button variant="es" id="blink"  :disabled="no_device">Flash Blink!</b-button></div>
-                    </b-row>
-                    <hr>
-                    <b-row class="p-2">
-                        <legend> Or select a platform and a program from the menu below.</legend>
-                        <b-form-select placeholder="Platform" v-model="sel_platform" textContent="Select a platform" id="platformSelector">
-                            <template v-slot:first>
-                                <b-form-select-option :value="null" disabled>-- Platform --</b-form-select-option>
-                            </template>
-                            <option v-for="platform in platforms" :value="platform">{{platform}}</option>
-                        </b-form-select>
-                        <b-form-select v-model="sel_example" id="firmwareSelector" required @change="programChanged">
-                            <template v-slot:first>
-                                <b-form-select-option :value="null" disabled>-- Example --</b-form-select-option>
-                            </template>
-                            <b-form-select-option v-for="example in platformExamples" v-bind:key="example.name" :value="example">{{example.name}}</b-form-select-option>
-                        </b-form-select>
-                    </b-row>
-                    <hr>
-                    <b-row class="p-2">
-                        <legend> Or select a file from your computer</legend>
-                            <b-form-file
-                                id="firmwareFile"
-                                v-model="firmwareFile"
-                                :state="Boolean(firmwareFile)"
-                                placeholder="Choose or drop a file..."
-                                drop-placeholder="Drop file here..."
-                            ></b-form-file>
-                    </b-row>
-                </b-container>
-            </b-col>
-        </b-row>
-        <b-row>
-        <b-col align="center" class="app_column">
-        <b-container align="center">
-            <legend>Programming Section</legend>
-            <b-button id="download" variant='es' :disabled="no_device || !sel_example"> Program</b-button>
-
-            <br> <br>
-            <b-button variant="es" v-b-toggle.collapseAdvanced>Advanced...</b-button>
-            <b-collapse id="collapseAdvanced">
-                <br> <div> <b-button variant="es" id="bootloader"  :disabled="no_device">Flash Bootloader Image</b-button> </div>                        
-            </b-collapse>
-
-            <div class="log" id="downloadLog"></div>            
-            <br><br>
-            <div v-if="sel_example||firmwareFile" >            
-                <div v-if="displaySelectedFile">
-                <!--<h3 class="info">Name: {{sel_example.name}}</h3>-->
-                <!--<li>Description: {{sel_example.description}}</li>-->
-                <!--<h3 class="info">File Location: {{sel_example.filepath}} </h3>-->
-                </div>
-            <br>
-            </div>
-            <div><div id = "readme"></div> </div>
-        </b-container>
-        </b-col>
-        </b-row>
-    </b-row>        
-    
-    </b-container>
+               <b-container class="app_body">
+		  <b-row align="center" class="app_column">
+		    <h1 style="font-size: 2.5rem;">HEARTWARE INSTRUMENTS</h1>
+		    <p style="margin-bottom: 2rem;">Flash LIVECUT with the latest firmware</p>
+		    <b-button variant="es" id="connect">Connect & Flash LIVECUT</b-button>
+		  </b-row>
+		</b-container>
     `,
     data: data,
     computed: {
@@ -368,19 +311,34 @@ var app = new Vue({
             }
             raw.send(null)
         },
-        programChanged(){
-        	var self = this
+        // programChanged(){
+        // 	var self = this
 
-            // Read new file
-            self.firmwareFileName = self.sel_example.name
-            this.displaySelectedFile = true;
-            var srcurl = self.sel_example.source.repo_url
-            //var expath = srcurl.substring(0, srcurl.lastIndexOf("/") +1).extend;
-            var expath = srcurl.concat(self.sel_example.filepath)
-        	readServerFirmwareFile(expath).then(buffer => {
-                firmwareFile = buffer
-            })
-        },
+        //     // Read new file
+        //     self.firmwareFileName = self.sel_example.name
+        //     this.displaySelectedFile = true;
+        //     var srcurl = self.sel_example.source.repo_url
+        //     //var expath = srcurl.substring(0, srcurl.lastIndexOf("/") +1).extend;
+        //     var expath = srcurl.concat(self.sel_example.filepath)
+        // 	readServerFirmwareFile(expath).then(buffer => {
+        //         firmwareFile = buffer
+        //     })
+        // }
+	programChanged(){
+	    var self = this;
+	    self.firmwareFileName = "LIVECUT";
+	    this.displaySelectedFile = true;
+	    var livecutExample = self.examples.find(e => e.name.toLowerCase().includes("livecut"));
+	    if (livecutExample) {
+	        self.sel_example = livecutExample;
+	        var srcurl = livecutExample.source.repo_url;
+	        var expath = srcurl.concat(livecutExample.filepath);
+	        readServerFirmwareFile(expath).then(buffer => {
+	            firmwareFile = buffer;
+	        });
+	    }
+	}
+	,
     },
     watch: {
         firmwareFile(newfile){

@@ -150,7 +150,7 @@ code.language-cpp {
 
 .logo-glitch {
     position: relative;
-    width: 300px;
+    width: 20%;
     margin: 40px auto 20px;
     filter: contrast(1.2) brightness(1.1);
     animation: glitch-pulse 2.5s infinite;

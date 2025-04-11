@@ -181,11 +181,11 @@ var app = new Vue({
                             <li><p>Click the Connect button at the top of the page.</p></li>
                             <li><p>Select, "DFU in FS Mode"</p></li>
                             <li>
-                                <p>Now do either of the following:</p>
+                                <p>Now do the following:</p>
                                 <ul>
-                                    <li><p>Flash the blink example</p></li>
-                                    <li><p>Select a platform and an example from the drop down menu (descriptions, diagrams, etc. coming soon)</p></li>
-                                    <li><p>Click the Choose File button, and select the .bin file you would like to flash. This can be found in a projects "build" folder.</p></li>
+                                    <li><p>Flash the Firmware</p></li>
+                                    <li><p>Select the platform and an example from the drop down menu (descriptions, diagrams, etc. coming soon)</p></li>
+                                    <li><p>...</p></li>
                                 </ul>
                             </li>
                             <li><p>Click Program, and wait for the progress bar to finish.</p></li>
@@ -396,10 +396,10 @@ var app = new Vue({
          //    })
 
             // grab the bootloader firmware file
-            var srcurl = blink_example.source.bootloader_url
-        	readServerFirmwareFile(srcurl, false).then(buffer => {
-                bootloaderFirmwareFile = buffer
-            })
+         //    var srcurl = blink_example.source.bootloader_url
+        	// readServerFirmwareFile(srcurl, false).then(buffer => {
+         //        bootloaderFirmwareFile = buffer
+         //    })
 
             //parse the query strings
             var searchParams = new URLSearchParams(getRootUrl().split("?")[1])

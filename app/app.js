@@ -116,24 +116,49 @@ function getRootUrl() {
 //     	.then(text => div.innerHTML = marked.parse(text.replace("404: Not Found", "No additional details available for this example.")));
 // }
 
+// function displayReadMe(fname) {
+//     var url = self.data.sel_example.url;
+//     fname = fname.substring(5, fname.length - 4);
+//     const div = document.getElementById("readme");
+
+//     marked.setOptions({
+//         renderer: new marked.Renderer(),
+//         highlight: function (code, language) {
+//             const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
+//             return hljs.highlight(validLanguage, code).value;
+//         },
+//         pedantic: false,
+//         gfm: true,
+//         breaks: false,
+//         sanitize: true, // ⚠️ this should be true if you're injecting into your live DOM!
+//         smartLists: true,
+//         smartypants: false,
+//         xhtml: false
+//     });
+
+//     fetch(url)
+//         .then(response => response.text())
+//         .then(text => {
+//             const safeText = text.replace("404: Not Found", "No additional details available for this example.");
+//             div.innerHTML = `<div class="readme-box">${marked.parse(safeText)}</div>`;
+//         });
+// }
+
 function displayReadMe(fname) {
-    var url = self.data.sel_example.url;
-    fname = fname.substring(5, fname.length - 4);
+    if (!app.sel_example || !app.sel_example.url) return;
+
+    const url = app.sel_example.url;
     const div = document.getElementById("readme");
 
     marked.setOptions({
         renderer: new marked.Renderer(),
-        highlight: function (code, language) {
+        highlight: function(code, language) {
             const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
             return hljs.highlight(validLanguage, code).value;
         },
-        pedantic: false,
-        gfm: true,
-        breaks: false,
-        sanitize: true, // ⚠️ this should be true if you're injecting into your live DOM!
+        sanitize: true,
         smartLists: true,
-        smartypants: false,
-        xhtml: false
+        gfm: true
     });
 
     fetch(url)
@@ -141,8 +166,12 @@ function displayReadMe(fname) {
         .then(text => {
             const safeText = text.replace("404: Not Found", "No additional details available for this example.");
             div.innerHTML = `<div class="readme-box">${marked.parse(safeText)}</div>`;
+        })
+        .catch(err => {
+            div.innerHTML = `<div class="readme-box">Unable to load README: ${err.message}</div>`;
         });
 }
+
 
 async function readServerFirmwareFile(path, dispReadme = true)
 {

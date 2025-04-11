@@ -84,9 +84,7 @@ table, th, td {
 }
 
 #readme {
-    background-color: #1a1a1a;
-    padding: 15px;
-    border-radius: 10px;
+   text-align: left;
 }
 
 code.language-cpp {

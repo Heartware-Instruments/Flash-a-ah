@@ -512,7 +512,7 @@ var dfu = {};
         let blocks = [];
         let bytes_read = 0;
 
-        this.logInfo("Copying data from DFU device to browser");
+        this.logInfo("Persuading machine elves to copy data from DFU device to browser");
         // Initialize progress to 0
         this.logProgress(0);
 
@@ -607,7 +607,7 @@ var dfu = {};
         }
 
         this.logInfo("Wrote " + bytes_sent + " bytes");
-        this.logInfo("Manifesting new firmware");
+        this.logInfo("Currently brain wahsing transistors to manifest your new firmware");
 
         if (manifestationTolerant) {
             // Transition to MANIFEST_SYNC state

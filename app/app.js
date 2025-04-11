@@ -140,9 +140,7 @@ function displayReadMe(fname) {
         .then(response => response.text())
         .then(text => {
             const safeText = text.replace("404: Not Found", "No additional details available for this example.");
-            // div.innerHTML = `<div class="readme-box">${marked.parse(safeText)}</div>`;
-	    div.innerHTML = `<div class="readme-box">${marked.parse(safeText)}</div>`;
-
+            div.innerHTML = `<div class="readme-box">${marked.parse(safeText)}</div>`;
         });
 }
 

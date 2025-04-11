@@ -25,60 +25,6 @@ function getRootUrl() {
     return url;
 }
 
-// Reads the specified file containing JSON example meta-data
-// function gatherExampleData()
-// {
-//     // Get Source list as data 
-//     var self = this // assign self to 'this' before nested function calls...
-//     var src_url = getRootUrl().concat("data/sources.json") 
-//     var raw = new XMLHttpRequest();
-//     raw.open("GET", src_url, true);
-//     raw.responseType = "text"
-//     raw.onreadystatechange = function ()
-//     {
-//         if (this.readyState === 4 && this.status === 200) {
-//             var obj = this.response; 
-//             buffer = JSON.parse(obj);
-//             buffer.forEach( function(ex_src) {
-//                 // Launch another request with async function to load examples from the 
-//                 // specified urls 
-//                 // This will fill examples directly, and replace the importExamples/timeout situation.
-//                 var ext_raw = new XMLHttpRequest();
-//                 ext_raw.open("GET", ex_src.data_url, true);
-//                 ext_raw.responseType = "text"
-//                 ext_raw.onreadystatechange = function ()
-//                 {
-//                     if (this.readyState === 4 && this.status === 200) {
-//                         // Now this.response will contain actual example data 
-//                         var ext_obj = this.response;
-//                         ex_buffer = JSON.parse(ext_obj);
-//                         // Now we could just fill the examples data
-//                         // ex_buffer.forEach( function(ex_data) {
-//                         //     console.log("%s - %s", ex_src.name, ex_data.name);
-//                         // })
-//                         const unique_platforms = [...new Set(ex_buffer.map(obj => obj.platform))]
-//                         // This needs to be fixed to 'ADD' examples
-//                         //self.examples = data
-//                         self.examples.push(ex_buffer)
-//                         var temp_platforms = self.platforms.push(unique_platforms)
-
-//                         const new_platforms = [...new Set(temp_platforms.map(obj => obj))]
-//                         self.platforms = new_platforms
-//                     }
-//                 }
-//                 ext_raw.send(null)
-
-//                     // var self = this
-//                     // const unique_platforms = [...new Set(data.map(obj => obj.platform))] 
-//                     // self.examples = data
-//                     // self.platforms = unique_platforms
-//             })
-//         }
-//     }
-//     raw.send(null)
-// }
-
-
 function displayReadMe(fname)
 {
     var url = self.data.sel_example.url
@@ -179,11 +125,11 @@ var app = new Vue({
                             <li><p>Click the Connect button at the top of the page.</p></li>
                             <li><p>Select, "DFU in FS Mode"</p></li>
                             <li>
-                                <p>Now do the following:</p>
+                                <p>Now do either of the following:</p>
                                 <ul>
-                                    <li><p>Flash the Firmware</p></li>
-                                    <li><p>Select the platform and an example from the drop down menu (descriptions, diagrams, etc. coming soon)</p></li>
-                                    <li><p>...</p></li>
+                                    <li><p>Flash the blink example</p></li>
+                                    <li><p>Select a platform and an example from the drop down menu (descriptions, diagrams, etc. coming soon)</p></li>
+                                    <li><p>Click the Choose File button, and select the .bin file you would like to flash. This can be found in a projects "build" folder.</p></li>
                                 </ul>
                             </li>
                             <li><p>Click Program, and wait for the progress bar to finish.</p></li>
@@ -216,6 +162,10 @@ var app = new Vue({
         <b-row align="between">
             <b-col align="center" class="app_column">
                 <b-container>
+                    <b-row class="p-2">
+                        <legend>Getting Started? Flash the Blink example!</legend>
+                        <div><b-button variant="es" id="blink"  :disabled="no_device">Flash Blink!</b-button></div>
+                    </b-row>
                     <hr>
                     <b-row class="p-2">
                         <legend> Or select a platform and a program from the menu below.</legend>
@@ -233,6 +183,16 @@ var app = new Vue({
                         </b-form-select>
                     </b-row>
                     <hr>
+                    <b-row class="p-2">
+                        <legend> Or select a file from your computer</legend>
+                            <b-form-file
+                                id="firmwareFile"
+                                v-model="firmwareFile"
+                                :state="Boolean(firmwareFile)"
+                                placeholder="Choose or drop a file..."
+                                drop-placeholder="Drop file here..."
+                            ></b-form-file>
+                    </b-row>
                 </b-container>
             </b-col>
         </b-row>

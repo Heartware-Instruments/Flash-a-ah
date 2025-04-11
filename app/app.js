@@ -218,10 +218,6 @@ var app = new Vue({
         <b-row align="between">
             <b-col align="center" class="app_column">
                 <b-container>
-                    <b-row class="p-2">
-                        <legend>Getting Started? Flash the Blink example!</legend>
-                        <div><b-button variant="es" id="blink"  :disabled="no_device">Flash Blink!</b-button></div>
-                    </b-row>
                     <hr>
                     <b-row class="p-2">
                         <legend> Or select a platform and a program from the menu below.</legend>
@@ -239,16 +235,6 @@ var app = new Vue({
                         </b-form-select>
                     </b-row>
                     <hr>
-                    <b-row class="p-2">
-                        <legend> Or select a file from your computer</legend>
-                            <b-form-file
-                                id="firmwareFile"
-                                v-model="firmwareFile"
-                                :state="Boolean(firmwareFile)"
-                                placeholder="Choose or drop a file..."
-                                drop-placeholder="Drop file here..."
-                            ></b-form-file>
-                    </b-row>
                 </b-container>
             </b-col>
         </b-row>
@@ -399,15 +385,15 @@ var app = new Vue({
             var self = this
 
             //grab the blink firmware file
-            var blink_example = self.examples.filter(example => example.name.toLowerCase() === "blink" && example.platform === "seed")[0]
+            // var blink_example = self.examples.filter(example => example.name.toLowerCase() === "blink" && example.platform === "seed")[0]
 
             // Read new file
-            self.firmwareFileName = blink_example.name
-            var srcurl = blink_example.source.repo_url
-            var expath = srcurl.concat(blink_example.filepath)
-        	readServerFirmwareFile(expath, false).then(buffer => {
-                blinkFirmwareFile = buffer
-            })
+         //    self.firmwareFileName = blink_example.name
+         //    var srcurl = blink_example.source.repo_url
+         //    var expath = srcurl.concat(blink_example.filepath)
+        	// readServerFirmwareFile(expath, false).then(buffer => {
+         //        blinkFirmwareFile = buffer
+         //    })
 
             // grab the bootloader firmware file
             var srcurl = blink_example.source.bootloader_url

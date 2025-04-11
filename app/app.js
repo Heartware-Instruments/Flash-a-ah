@@ -1,8 +1,6 @@
 // Generic Strings
 const root_url = "https://heartware-instruments.github.io/Flash-a-ah"
 
-
-
 var data = { 
     platforms: [],
     examples: [],
@@ -385,21 +383,21 @@ var app = new Vue({
             var self = this
 
             //grab the blink firmware file
-            // var blink_example = self.examples.filter(example => example.name.toLowerCase() === "blink" && example.platform === "seed")[0]
+            var blink_example = self.examples.filter(example => example.name.toLowerCase() === "blink" && example.platform === "seed")[0]
 
             // Read new file
-         //    self.firmwareFileName = blink_example.name
-         //    var srcurl = blink_example.source.repo_url
-         //    var expath = srcurl.concat(blink_example.filepath)
-        	// readServerFirmwareFile(expath, false).then(buffer => {
-         //        blinkFirmwareFile = buffer
-         //    })
+            self.firmwareFileName = blink_example.name
+            var srcurl = blink_example.source.repo_url
+            var expath = srcurl.concat(blink_example.filepath)
+        	readServerFirmwareFile(expath, false).then(buffer => {
+                blinkFirmwareFile = buffer
+            })
 
             // grab the bootloader firmware file
-         //    var srcurl = blink_example.source.bootloader_url
-        	// readServerFirmwareFile(srcurl, false).then(buffer => {
-         //        bootloaderFirmwareFile = buffer
-         //    })
+            var srcurl = blink_example.source.bootloader_url
+        	readServerFirmwareFile(srcurl, false).then(buffer => {
+                bootloaderFirmwareFile = buffer
+            })
 
             //parse the query strings
             var searchParams = new URLSearchParams(getRootUrl().split("?")[1])

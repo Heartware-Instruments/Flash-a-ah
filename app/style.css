@@ -5,6 +5,68 @@
   src: url(./data/ModularAmplitude.otf);
 }
 
+.info{
+    text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid white;
+}
+
+code.language-cpp{
+    color: white;
+}
+
+#readme{
+text-align: left;
+}
+
+.btn-es{
+    background-color: #ffb600;
+    color: white;
+}
+
+.app_body {
+    color: #fff;
+    background-color: #ffffff;
+}
+
+
+.app_column {
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: #505050;
+    padding: 10px;
+    border: solid;
+    border-radius: 15px;
+    border-color: gray;
+    margin: 5px;
+}
+
+.nested_list {
+    justify-content: left;
+    align-items: left;
+    margin: 20px;
+    text-align: left;
+}
+
+.daisystyle {
+    color: #fff;
+    background-color: gray;
+    padding: 10px;
+    border: solid;
+    border-radius: 15px;
+    border-color: #ffb600;
+    margin: 5px;
+
+}
+
+/* 
 body {
     font-family: 'ModularAmplitude', sans-serif;
     background-color: #1c1c1c;
@@ -26,19 +88,8 @@ body {
     box-shadow:
         inset 0 0 0 1px rgba(255, 215, 0, 0.2),
         0 8px 16px rgba(0, 0, 0, 0.4);
-/*     max-width: 700px; */
     text-align: center;
 }
-/* 
-.app_column {
-    background-color: #111;
-    border: 2px solid #00ff00;
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px;
-    text-align: center;
-}
- */
 .btn-es {
     background-color: #ffb600;
     color: black;
@@ -139,7 +190,7 @@ code.language-cpp {
 }
 
 .logo-glitch img {
-    width: 200px; /* You can scale this as needed */
+    width: 200px; 
     max-width: 90vw;
     animation: glitch 1.2s infinite linear;
     display: block;
@@ -191,3 +242,4 @@ code.language-cpp {
   }
 }
 
+ */

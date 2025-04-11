@@ -130,7 +130,7 @@ function displayReadMe(fname) {
         pedantic: false,
         gfm: true,
         breaks: false,
-        sanitize: false, // ⚠️ this should be true if you're injecting into your live DOM!
+        sanitize: true, // ⚠️ this should be true if you're injecting into your live DOM!
         smartLists: true,
         smartypants: false,
         xhtml: false

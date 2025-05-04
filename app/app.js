@@ -257,64 +257,62 @@ var app = new Vue({
         this.importExamples()
     },
     methods: {
-        importExamples() {
-            // var self = this
-            // const unique_platforms = [...new Set(data.map(obj => obj.platform))] 
-            // self.examples = data
-            // self.platforms = unique_platforms
-            // New code below:
-            // Get Source list as data 
-            var self = this // assign self to 'this' before nested function calls...
-            var src_url = getRootUrl().split("?")[0].concat("data/sources.json") //need to strip out query string
-            var raw = new XMLHttpRequest();
-            raw.open("GET", src_url, true);
-            raw.responseType = "text"
-            raw.onreadystatechange = function ()
-            {
-                if (this.readyState === 4 && this.status === 200) {
-                    var obj = this.response;
-                    buffer = JSON.parse(obj);
-                    buffer.forEach( function(ex_src) {
-                        // Launch another request with async function to load examples from the 
-                        // specified urls 
-                        // This will fill examples directly, and replace the importExamples/timeout situation.
-                        var ext_raw = new XMLHttpRequest();
-                        ext_raw.open("GET", ex_src.data_url, true);
-                        ext_raw.responseType = "text"
-                        ext_raw.onreadystatechange = function ()
-                        {
-                            // This response will contain example data for the specified source.
-                            if (this.readyState === 4 && this.status === 200) {
-                                var ext_obj = this.response;
-                                ex_buffer = JSON.parse(ext_obj);
-                                const unique_platforms = [...new Set(ex_buffer.map(obj => obj.platform))]
-                                ex_buffer.forEach( function(ex_dat) {
-                                    //  Add "source" to example data
-                                    ex_dat.source = ex_src
-                                    
-                                    self.examples.sort(function (i1, i2){ 
-                                        return i1.name.toLowerCase() < i2.name.toLowerCase() ? -1 : 1
-                                    })
-                                    self.examples.push(ex_dat)
-                                })
-                                unique_platforms.forEach( function(u_plat) {
-                                    if (!self.platforms.includes(u_plat)) {
-                                        self.platforms.push(u_plat)
-                                    }
-                                })
+        js
+importExamples() {
+    var self = this // assign self to 'this' before nested function calls...
+    var src_url = getRootUrl().split("?")[0].concat("data/sources.json") //need to strip out query string
+    var raw = new XMLHttpRequest();
+    raw.open("GET", src_url, true);
+    raw.responseType = "text"
+    raw.onreadystatechange = function ()
+    {
+        if (this.readyState === 4 && this.status === 200) {
+            var obj = this.response;
+            buffer = JSON.parse(obj);
+            buffer.forEach( function(ex_src) {
+                var ext_raw = new XMLHttpRequest();
+                ext_raw.open("GET", ex_src.data_url, true);
+                ext_raw.responseType = "text"
+                ext_raw.onreadystatechange = function ()
+                {
+                    if (this.readyState === 4 && this.status === 200) {
+                        var ext_obj = this.response;
+                        ex_buffer = JSON.parse(ext_obj);
+                        const unique_platforms = [...new Set(ex_buffer.map(obj => obj.platform))]
+                        ex_buffer.forEach( function(ex_dat) {
+                            ex_dat.source = ex_src
+                            
+                            self.examples.sort(function (i1, i2){ 
+                                return i1.name.toLowerCase() < i2.name.toLowerCase() ? -1 : 1
+                            })
+                            self.examples.push(ex_dat)
+                        })
+                        unique_platforms.forEach( function(u_plat) {
+                            if (!self.platforms.includes(u_plat)) {
+                                self.platforms.push(u_plat)
                             }
+                        })
+                        
+                        // Auto-select the last platform and example when data is loaded
+                        if (self.platforms.length > 0 && !self.sel_platform) {
+                            self.sel_platform = self.platforms[self.platforms.length - 1];
+                            
+                            // Wait for computed property to update
+                            self.$nextTick(() => {
+                                if (self.platformExamples.length > 0) {
+                                    self.sel_example = self.platformExamples[self.platformExamples.length - 1];
+                                    self.programChanged();
+                                }
+                            });
                         }
-                        ext_raw.send(null)
-
-                            // var self = this
-                            // const unique_platforms = [...new Set(data.map(obj => obj.platform))] 
-                            // self.examples = data
-                            // self.platforms = unique_platforms
-                    })
+                    }
                 }
-            }
-            raw.send(null)
-        },
+                ext_raw.send(null)
+            })
+        }
+    }
+    raw.send(null)
+},
         programChanged(){
         	var self = this
 

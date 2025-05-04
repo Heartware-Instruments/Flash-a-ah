@@ -189,7 +189,7 @@ var app = new Vue({
                             <template v-slot:first>
                                 <b-form-select-option :value="null" disabled>-- Example --</b-form-select-option>
                             </template>
-                            <b-form-select-option v-for="example in platformExamples" v-bind:key="example.name" :value="example">{{example.name}}</b-form-select-option>
+                            <b-form-select-option v-for="example in platformExamples" v-bind:key="?example.name" :value="example">{{?example.name}}</b-form-select-option>
                         </b-form-select>
                     </b-row>
                     <hr>

@@ -65,12 +65,14 @@ function displayReadMe(fname)
                 let cleanedText = text.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "");
                 div.innerHTML = marked.parse(cleanedText.replace("404: Not Found", "No additional details available for this example."));
             });
-        } else {
-            div.innerHTML = marked.parse("Error: Unable to fetch content. Status code: " + response.status);
         }
+        //else {
+        //    div.innerHTML = marked.parse("Error: Unable to fetch content. Status code: " + response.status);
+        //}
     })
     .catch(error => {
-        div.innerHTML = marked.parse("Error fetching content: " + error.message);
+        console.log("Error fetching content: " + error.message)
+    //    div.innerHTML = marked.parse("Error fetching content: " + error.message);
     });
     //.then(text => div.innerHTML = marked.parse(text.replace("404: Not Found", "No additional details available for this example.")));
 }

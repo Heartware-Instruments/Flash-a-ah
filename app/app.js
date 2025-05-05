@@ -59,7 +59,13 @@ function displayReadMe(fname)
 
     fetch(url)
     .then(response => response.text())
-    .then(text => div.innerHTML = marked.parse(text.replace("404: Not Found", "No additional details available for this example.")));
+    .then(text => {
+        // Remove style tags from the text
+        let cleanedText = text.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "");
+        cleanedText = cleanedText.replace("404: Not Found", "No additional details available for this example.");
+        div.innerHTML = marked.parse(cleanedText);
+    });
+    //.then(text => div.innerHTML = marked.parse(text.replace("404: Not Found", "No additional details available for this example.")));
 }
 
 async function readServerFirmwareFile(path, dispReadme = true)
